@@ -1,0 +1,32 @@
+import RPi.GPIO as GPIO
+import time
+GPIO.setmode(GPIO.BOARD)
+
+GPIO.setup(13, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(11, GPIO.OUT)
+servo1 = GPIO.PWM(11,50)
+
+while True:
+  input_state = GPIO.input(13)
+  if input_state == False:
+    print("on")
+    time.sleep(0.2)
+    
+    servo1.start(0)
+    time.sleep(0.5)
+    
+    duty = 2
+    time.sleep(0.5)
+    
+    
+    print ("90 deg")
+    servo1.ChangeDutyCycle(7)
+    time.sleep(0.5)
+    servo1.ChangeDutyCycle(0)
+    time.sleep(1.5)
+    
+    print("0 deg")
+    servo1.ChangeDutyCycle(2)
+    time.sleep(0.5)
+    servo1.ChangeDutyCycle(0)
+    
